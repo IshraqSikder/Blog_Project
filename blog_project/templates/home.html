@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block content %}
+<h2 class="container">Home Page</h2>
+<div class="container d-flex flex-wrap justify-content-center">
+  {% for i in data %}
+  <div class="col-sm-3">
+    <div class="card mx-2 my-2">
+      <div class="card-body">
+        <h5 class="card-title">{{i.title}}</h5>
+        <p class="card-text">{{i.content |truncatewords:15 }}</p>
+        <p>Author : {{i.author.name}}</p>
+        <p
+          >Category : {% for j in i.category.all %}
+          <button class="btn btn-primary btn-sm my-1">{{j.name}}</button> {% endfor %}
+      </p>
+        <a href="{% url 'edit_post' i.id %}" class="btn btn-warning btn-sm px-3">Edit</a>
+        <a href="{% url 'delete_post' i.id %}" class="btn btn-danger btn-sm mx-2 px-3">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
